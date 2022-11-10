@@ -8,7 +8,7 @@ from random import *
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Oskar ist doof")
-
+coordinates = []
 #Farben
 GREENISH = (144, 238, 144)
 
@@ -19,7 +19,16 @@ FPS = 60
 COFFEE_BIKE_IMAGE = pygame.image.load(
     os.path.join('Assets', 'CB.png'))
 
-# Random Spawn für das CB
+BES_IMAGE = pygame.image.load(
+    os.path.join('Assets', 'bes.png'))
+
+def new_spawn_bes():
+    for p in range(100):
+            x = randint(0, 849)
+            y = randint(0, 449)
+            z = x, y
+            coordinates.append(z)
+
 def new_spawn():
     x = randint(0, 849)
     y = randint(0, 449)
@@ -29,9 +38,14 @@ def new_spawn():
 # Gibt random Spawnpunkt
 SPAWN = new_spawn()
 
+def draw_bes():
+    for i in range(100):
+        WIN.blit(BES_IMAGE, (coordinates[i]))
+
 # Sorgt für das Visuelle im Frame
 def draw_window():
     WIN.fill(GREENISH)
+    draw_bes()
     WIN.blit(COFFEE_BIKE_IMAGE, (SPAWN))
     pygame.display.update()
 
@@ -44,6 +58,7 @@ def main ():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+        new_spawn_bes()
         new_spawn()
         draw_window()
 
