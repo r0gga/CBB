@@ -7,7 +7,7 @@ from random import *
 # Aussehen des Fenster
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Oskar ist doof")
+pygame.display.set_caption("Samuel stinkt")
 coordinates = []
 #Farben
 GREENISH = (144, 238, 144)
