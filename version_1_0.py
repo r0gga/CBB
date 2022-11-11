@@ -1,19 +1,23 @@
 # Benötigte Module
 import pygame
 import os
-import random
 from random import *
+from Classes.button import Button
+import Menu
+import runpy
+
 
 # Aussehen des Fenster
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Oskar ist doof")
+pygame.display.set_caption("Simulation V.0.6") #Oskar ist doof
 coordinates = []
 #Farben
 GREENISH = (144, 238, 144)
 
 # Aktualisierungsrate
 FPS = 60
+BUTTON_WIDTH, BUTTON_HEIGHT = 55, 45
 
 # Surfaces
 COFFEE_BIKE_IMAGE = pygame.image.load(
@@ -21,6 +25,16 @@ COFFEE_BIKE_IMAGE = pygame.image.load(
 
 BES_IMAGE = pygame.image.load(
     os.path.join('Assets', 'bes.png'))
+
+PAUSE_IMAGE = pygame.image.load(
+    os.path.join('Assets', 'pause.png'))
+PAUSE = pygame.transform.scale(PAUSE_IMAGE, (555, 355))
+
+MENU_IMAGE = pygame.image.load(
+    os.path.join('Assets', 'menu.png'))
+MENU = pygame.transform.scale(MENU_IMAGE, (4000, 2000))
+
+paus_e = Button(5, 5, PAUSE)
 
 def new_spawn_bes():
     for p in range(100):
@@ -35,7 +49,7 @@ def new_spawn():
     z = x, y
     return z
 
-# Gibt random Spawnpunkt
+# Gibt random Spawnpunkt CB
 SPAWN = new_spawn()
 
 def draw_bes():
@@ -46,7 +60,9 @@ def draw_bes():
 def draw_window():
     WIN.fill(GREENISH)
     draw_bes()
-    WIN.blit(COFFEE_BIKE_IMAGE, (SPAWN))
+    if paus_e.draw():
+        WIN.blit(MENU, (350, 50))
+    WIN.blit(COFFEE_BIKE_IMAGE, SPAWN)
     pygame.display.update()
 
 # Mainloop
@@ -66,4 +82,3 @@ def main ():
 
 if __name__ == '__main__':
     main()
-
